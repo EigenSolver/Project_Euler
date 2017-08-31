@@ -1,0 +1,12 @@
+﻿  read_file.cpp
+c:\users\84338\documents\python scripts\project euler\p18\p18\node.cpp(77): warning C4715: “treeContains”: 不是所有的控件路径都返回值
+read_file.obj : error LNK2005: "void __cdecl addChildren(struct node *,struct node *,struct node *)" (?addChildren@@YAXPAUnode@@00@Z) 已经在 node.obj 中定义
+read_file.obj : error LNK2005: "void __cdecl addLeft(struct node *,struct node *)" (?addLeft@@YAXPAUnode@@0@Z) 已经在 node.obj 中定义
+read_file.obj : error LNK2005: "void __cdecl addRight(struct node *,struct node *)" (?addRight@@YAXPAUnode@@0@Z) 已经在 node.obj 中定义
+read_file.obj : error LNK2005: "int __cdecl countNodes(struct node *)" (?countNodes@@YAHPAUnode@@@Z) 已经在 node.obj 中定义
+read_file.obj : error LNK2005: "void __cdecl inorderPrint(struct node *)" (?inorderPrint@@YAXPAUnode@@@Z) 已经在 node.obj 中定义
+read_file.obj : error LNK2005: "void __cdecl postorderPrint(struct node *)" (?postorderPrint@@YAXPAUnode@@@Z) 已经在 node.obj 中定义
+read_file.obj : error LNK2005: "void __cdecl preorderPrint(struct node *)" (?preorderPrint@@YAXPAUnode@@@Z) 已经在 node.obj 中定义
+read_file.obj : error LNK2005: "bool __cdecl treeContains(struct node *,int)" (?treeContains@@YA_NPAUnode@@H@Z) 已经在 node.obj 中定义
+read_file.obj : error LNK2005: "void __cdecl treeInsert(struct node *,int)" (?treeInsert@@YAXPAUnode@@H@Z) 已经在 node.obj 中定义
+C:\Users\84338\Documents\Python Scripts\Project Euler\P18\Debug\P18.exe : fatal error LNK1169: 找到一个或多个多重定义的符号
