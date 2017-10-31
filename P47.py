@@ -1,39 +1,36 @@
 # -*- coding: utf-8 -*-
 
-from Euler_Lib import prime_factorization,eratosthenes
+from Euler_Lib import eratosthenes
 import numpy as np
 
+limit=150000
+__primes=eratosthenes(limit)
+print('num of primes calculation finished!')
 
+@np.vectorize
+def DPF(num):
+    '''
+    find the number of distinct prime factors given a integer num
+    '''
+    result=0
+    for p in __primes:
+        if p>=num:
+            break
+        if num%p==0:
+            result+=1
+            while num%p==0:
+                num//=p
+    return result
 
-def DPF(n):
-    return len(prime_factorization(n,__primes))
-    
+domain=np.arange(limit)
+num_of_factors=np.zeros(limit)
 
-__primes=eratosthenes(100000)
-
-start=647
-end=1000000
+print('num of factors calculation finished!')
 
 CONST=4
-result=0
-
-
-domain=np.arange(start,end)
-dist_fac=np.zeros(len(domain))
 for i in range(len(domain)):
-    dist_fac[i]=DPF(domain[i])
-    print(i)
-    if i%10000==0:
-        print('{0}/{1} has finished!'.format(i,len(domain)))
-        
-
-print('factors calculation finished!')
-
-for i in range(len(domain)-CONST):
-    group=[start+i for i in range(CONST)]
-    if all([dist_fac[i]==CONST for i in group]):
-        result=domain[i]
+    group=[num_of_factors[i+j] for j in range(CONST)]
+    if all([num==CONST for num in group]):
+        print(group)
         break
-    start+=1
-
 
