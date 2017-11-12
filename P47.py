@@ -2,37 +2,48 @@
 
 from Euler_Lib import prime_factorization,eratosthenes
 import numpy as np
+from math import sqrt 
 
+__primes,is_prime=eratosthenes(limit,return_boolean=True)
 
-
-def DPF(n):
-    return len(prime_factorization(n,__primes))
-    
-
-__primes=eratosthenes(100000)
-
-start=647
-end=1000000
+limit=200000
+start=0
+end=limit
 
 CONST=4
 result=0
 
 
+def DPF(number,primes):
+    if number in primes:
+        return 1
+    result=0
+    if primes is None:
+        primes=eratosthenes(int(sqrt(number)+1))
+    for p in primes:
+        if p>number:
+            break
+        if number%p==0:
+            result+=1
+            while number%p==0:
+                number//=p
+    return result
+
 domain=np.arange(start,end)
 dist_fac=np.zeros(len(domain))
+
 for i in range(len(domain)):
-    dist_fac[i]=DPF(domain[i])
-    print(i)
-    if i%10000==0:
+    dist_fac[i]=DPF(domain[i],__primes)
+    if i%3000==0:
         print('{0}/{1} has finished!'.format(i,len(domain)))
         
 
-print('factors calculation finished!')
+print('\n factors calculation finished!')
 
 for i in range(len(domain)-CONST):
-    group=[start+i for i in range(CONST)]
-    if all([dist_fac[i]==CONST for i in group]):
+    if np.sum(dist_fac[i:i+CONST]==CONST)==CONST:
         result=domain[i]
+        print(result)
         break
     start+=1
 
