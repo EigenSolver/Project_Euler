@@ -4,22 +4,37 @@ Created on Fri Jul 28 02:35:06 2017
 
 @author: 84338
 """
-from Euler_Lib import eratosthenes
-import fractions
 
-def find_circle(string):
-    for i in range(1,len(string)//2):
-        if string[:i]==string[i:2*i]:
-            return i
-    else:
-        return None
+import numpy as np
 
-primes=eratosthenes(1000)
-result=[]
-for i in primes:
-    string=str(decimal.Decimal(1/i)).split('.')[-1]
-    result.append(find_circle(string))
+@np.vectorize
+def len_of_circle(n):
+    limit=1000
+    remain=10**(len(str(n)))%n
+    remains=[remain]
+    time=0
 
-print(result)
+    while time<limit:
+        if remain==0:
+            return 0
+        remain*=10
+        while remain<n:
+            remain*=10
+            remains.append(-1)
+        remain=remain%n
+        l=len(remains)
+        for i in range(l):
+            if remains[i]!=-1 and remains[i]==remain:
+                return l-i
+        remains.append(remain)
+        time+=1
+    return -1
 
-        
+domain=np.arange(1,1000)
+result=len_of_circle(domain)
+if (-1) in result:
+    print(result==-1)
+else:
+    print(result.argmax()+1)
+
+

@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from Euler_Lib import prime_factorization,eratosthenes
+from Euler_Lib import eratosthenes
 import numpy as np
 from math import sqrt 
 
-__primes,is_prime=eratosthenes(limit,return_boolean=True)
 
 limit=200000
 start=0
@@ -13,6 +12,7 @@ end=limit
 CONST=4
 result=0
 
+__primes,is_prime=eratosthenes(limit,return_boolean=True)
 
 def DPF(number,primes):
     if number in primes:
@@ -44,7 +44,5 @@ for i in range(len(domain)-CONST):
     if np.sum(dist_fac[i:i+CONST]==CONST)==CONST:
         result=domain[i]
         print(result)
-        break
-    start+=1
 
 
