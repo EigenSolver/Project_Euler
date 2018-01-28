@@ -2,4 +2,4 @@
 
 Repository for Project Euler
 
-Play enjoy the charm of Python~
+Play, enjoy the charm of Python~

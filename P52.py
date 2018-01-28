@@ -14,8 +14,9 @@ def gen_domain(init,length):
         domain=np.hstack([domain,np.arange(start,limit//6+1)])
     return domain.astype(int)
 
-domain=gen_domain(4,7)
-for i in domain:
-    if all([permuteQ(str(i),str(n*i)) for n in (2,3,4,5,6)]):
-        print(i)
-        break
+if __name__=='__main__':
+    domain=gen_domain(4,7)
+    for i in domain:
+        if all([permuteQ(str(i),str(n*i)) for n in (2,3,4,5,6)]):
+            print(i)
+            break

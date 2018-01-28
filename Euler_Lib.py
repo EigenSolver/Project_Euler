@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from P3 import prime_factorization, gcd
-#from P4 import palindromeQ
+from P4 import palindromeQ
 from P5 import lcm
+import random
 #from P7 import eratosthenes
 #from P8 import product
 #from P12 import triangle_number,find_factors,num_of_factors
@@ -14,9 +15,14 @@ from P5 import lcm
 #from P37 import trunctableQ
 #from P38 import pandigitalQ
 #from P52 import permuteQ
+#from P55 import lychrelQ,reverse_str
 
 
 def combinationN(m, n):
+    '''
+    number of combination
+    choose n from m 
+    '''
     result = 1
     for i in range(n):
         result *= (m - i)
@@ -25,7 +31,7 @@ def combinationN(m, n):
     return result
 
 
-def combination(string, n):
+def combinations(string, n):
     result = []
     m = len(string)
     if m - n < n:
@@ -42,7 +48,7 @@ def combination(string, n):
             remain = string[:i] + string[i + 1:]
             letter = string[i]
             result += list(map(lambda x: letter + x,
-                               combination(remain, n - 1)))
+                               combinations(remain, n - 1)))
         return set(result)
 
 
@@ -91,3 +97,41 @@ def eratosthenes(end, start=2, return_boolean=False):
     if return_boolean:
         return primes[is_prime == 1], is_prime
     return primes[is_prime == 1]
+
+
+def decompose(n):
+    exponentOfTwo = 0
+
+    while n % 2 == 0:
+        n = n / 2
+        exponentOfTwo += 1
+
+    return exponentOfTwo, n
+
+
+def isWitness(possibleWitness, p, exponent, remainder):
+
+    possibleWitness = pow(possibleWitness, int(remainder), p)
+
+    if possibleWitness == 1 or possibleWitness == p - 1:
+        return False
+
+    for _ in range(exponent):
+        possibleWitness = pow(possibleWitness, 2, p)
+
+        if possibleWitness == p - 1:
+            return False
+        
+        return True
+
+def probablyPrime(p, accuracy=100):
+    if p == 2 or p == 3: return True
+    if p < 2: return False
+
+    exponent, remainder = decompose(p - 1)
+
+    for _ in range(accuracy):
+        possibleWitness = random.randint(2, p - 2)
+        if isWitness(possibleWitness, p, exponent, remainder):
+            return False
+    return True
