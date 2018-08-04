@@ -34,7 +34,7 @@ def prime(end,start=2):
 #质因子分解算法
 def prime_factorization(number, primes=None):
     if primes is None:
-        primes=eratosthenes(int(sqrt(number)+1))
+        primes=eratosthenes(int(sqrt(number)+2))
     prime_factors=[]
     for p in primes:
         n=0

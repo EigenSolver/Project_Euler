@@ -28,7 +28,7 @@ def combinationN(m, n):
         result *= (m - i)
     for i in range(n):
         result /= (i + 1)
-    return result
+    return int(result)
 
 
 def combinations(string, n):
