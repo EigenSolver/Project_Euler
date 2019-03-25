@@ -1,5 +1,7 @@
 # Project_Euler
 
-Repository for Project Euler
+Repository for Project Euler Started from 2017. 
 
-Play, enjoy the charm of Python~
+Enjoy the pleasure of challenge.
+
+Language: Python/Julia/Mathematica
