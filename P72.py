@@ -1,52 +1,27 @@
-from Euler_Lib import eratosthenes,gcd,prime_factorization
-from datetime import datetime
-
-limit=9
-count=0
-view=True
-visual=[]
-
-start=datetime.now()
-
-print("Generating primes....")
-primes=set(eratosthenes(limit))
-print("Done")
-
-for d in range(2,limit+1):
-#    if d%(limit//10)==0:
-#        print("{}0%".format(d//(limit//10)))
-    if d in primes:
-        count+=d-1
-        if view:
-            visual.extend(["{0}/{1}".format(n,d) for n in range(1,d)])
-    else:
-        factors=prime_factorization(d,primes)
-        for n in range(1,d):
-            if n==1:
-                count+=1
-                visual.append("{0}/{1}".format(n,d))
-            elif n in primes:
-                if d%n!=0:
-                    count+=1
-                    visual.append("{0}/{1}".format(n,d))
-            else:
-                if all([n%(f[0]) for f in factors]):
-                    count+=1
-                    visual.append("{0}/{1}".format(n,d))
-#            elif gcd(n,d)==1:
-#                count+=1
-#                if view:
-#                    visual.append("{0}/{1}".format(n,d))
-#            else:
-#                continue
-end=datetime.now()
-
-print(count)
-print("Time consuming: {}".format(end-start))
-if view:
-    print(visual)
-                
-        
     
+# 
+# Solution to Project Euler problem 72
+# Copyright (c) Project Nayuki. All rights reserved.
+# 
+# https://www.nayuki.io/page/project-euler-solutions
+# https://github.com/nayuki/Project-Euler-solutions
+# 
+
+import itertools
+
+def list_totients(n):
+	result = list(range(n + 1))
+	for i in range(2, len(result)):
+		if result[i] == i:  # i is prime
+			for j in range(i, len(result), i):
+				result[j] -= result[j] // i
+	return result
     
-    
+def compute():
+	totients = list_totients(10**6)
+	ans = sum(itertools.islice(totients, 2, None))
+	return str(ans)
+
+
+if __name__ == "__main__":
+	print(compute())
