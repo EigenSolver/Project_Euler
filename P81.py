@@ -33,6 +33,5 @@ def recurive_sum(matrix):
     for i in range(n):
         for j in range(m):
             matrix[i,j]+=min(matrix[i-1,j],matrix[i,j-1]) if i*j>0 else (matrix[i-1,j] if i else (matrix[i,j-1] if j else 0))
-    return matrix[-1,-1]
 
 print(recurive_sum(matrix))
